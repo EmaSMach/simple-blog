@@ -1,21 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Welcome to PosterMan{% endblock %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
 
 {% block content %}
+<div class="container">
 
+<div>
 <h1>Welcome to Poster</h1>
 <h2>A new way to show your thoughts to the world</h2>
+</div>
 
 <h3>Posts</h3>
 {% for post in posts %}
-<h2><a href="#">{{ post.title }}</a></h2>
-
-{% if post.published_date %}
-<p>Published: {{ post.published_date }}</p>
-{% endif %}
+<div class="container-fluid">
+    <p>Published: {{ post.published_date }}</p>
+    <h2><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.text | linebreaksbr }}</p>
+</div>
 
 {% endfor %}
-
+</div>
 {% endblock %}
 
